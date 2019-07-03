@@ -5,6 +5,7 @@ class House
     @price = price.delete("$")
     @address = address
     @rooms = []
+    @total_area = 0
   end
 
   def add_room(room)
@@ -22,10 +23,17 @@ class House
   end
 
   def area
-    total_area = 0
     @rooms.each do |room|
-      total_area += room.area
+      @total_area += room.area
     end
-    total_area
+    @total_area
+  end
+
+  def price_per_square_foot
+    ((@price.to_f / @total_area * 100).round / 100.0).to_s
+  end
+
+  def rooms_sorted_by_area
+    @rooms.sort_by(&:area)
   end
 end
