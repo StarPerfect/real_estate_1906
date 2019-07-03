@@ -36,4 +36,12 @@ class House
   def rooms_sorted_by_area
     @rooms.sort_by(&:area)
   end
+
+  def rooms_by_category
+    rooms_by_cat = Hash.new
+    @rooms.each do |room|
+      rooms_by_cat[room.category] = rooms_from_category(room.category)
+    end
+    rooms_by_cat
+  end
 end
